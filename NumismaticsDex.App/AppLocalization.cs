@@ -20,6 +20,14 @@ public static class AppLocalization
         ["collection"] = ("专题", "專題", "Collection"),
         ["collectionTitle"] = ("中国 - 日本傀儡银行", "中國 - 日本傀儡銀行", "CHINA - Japanese Puppet Banks"),
         ["collectionDescription"] = ("日本占领时期，中国各银行发行的纸币。", "日本佔領時期，中國各銀行發行的紙幣。", "Paper money issued by banks under Japanese occupation in China."),
+        ["chinaForeignBanksTitle"] = ("中国 - 外国银行", "中國 - 外國銀行", "CHINA - FOREIGN BANKS"),
+        ["chinaForeignBanksDescription"] = ("在中国经营的外国银行发行的纸币。", "在中國營業的外國銀行發行的紙幣。", "Banknotes issued by foreign banks operating in China."),
+        ["kiauChauTitle"] = ("中国 - 胶州湾租借地", "中國 - 膠州灣租借地", "KIAU CHAU"),
+        ["kiauChauDescription"] = ("德国租借胶州湾时期在当地流通的纸币。", "德國租借膠州灣時期在當地流通的紙幣。", "Banknotes circulating in the German leasehold of Kiautschou."),
+        ["chinaChineseMilitaryTitle"] = ("中国 - 中国军用纸币", "中國 - 中國軍用紙幣", "CHINA - CHINESE MILITARY"),
+        ["chinaChineseMilitaryDescription"] = ("中国军政府、军队及地方军事当局发行的纸币。", "中國軍政府、軍隊及地方軍事當局發行的紙幣。", "Banknotes issued by Chinese military governments, armies, and regional military authorities."),
+        ["chinaJapaneseSovietMilitaryTitle"] = ("中国 - 日苏军用纸币", "中國 - 日蘇軍用紙幣", "CHINA - JAPANESE & SOVIET MILITARY"),
+        ["chinaJapaneseSovietMilitaryDescription"] = ("日本及苏联军事当局在中国发行的军用货币。", "日本及蘇聯軍事當局在中國發行的軍用貨幣。", "Military currency issued in China by Japanese and Soviet authorities."),
         ["peoplesRepublicTitle"] = ("中国 - 人民共和国", "中國 - 人民共和國", "CHINA - People's Republic"),
         ["peoplesRepublicDescription"] = ("中华人民共和国发行的人民币、外汇兑换券及军用支付凭证。", "中華人民共和國發行的人民幣、外匯兌換券及軍用支付憑證。", "Renminbi banknotes, foreign exchange certificates, and military payment certificates issued in the People's Republic of China."),
         ["manchukuoTitle"] = ("中国 - 满洲国", "中國 - 滿洲國", "MANCHUKUO"),
@@ -108,7 +116,6 @@ public static class AppLocalization
     ["nr"] = "番号",
     ["europeans"] = "欧州人",
     ["marble"] = "大理石",
-    ["into"] = "へ",
     ["it"] = "それ",
     ["dividewd"] = "分割された",
     ["days"] = "日間",
@@ -279,6 +286,14 @@ public static class AppLocalization
         ["collection"] = "コレクション",
         ["collectionTitle"] = "中国 - 日本占領期の銀行券",
         ["collectionDescription"] = "日本占領期に中国の銀行が発行した紙幣。",
+        ["chinaForeignBanksTitle"] = "中国 - 外国銀行",
+        ["chinaForeignBanksDescription"] = "中国で営業していた外国銀行が発行した紙幣。",
+        ["kiauChauTitle"] = "中国 - 膠州湾租借地",
+        ["kiauChauDescription"] = "膠州湾のドイツ租借地で流通した紙幣。",
+        ["chinaChineseMilitaryTitle"] = "中国 - 中国軍用紙幣",
+        ["chinaChineseMilitaryDescription"] = "中国の軍政府、軍隊、地方軍事当局が発行した紙幣。",
+        ["chinaJapaneseSovietMilitaryTitle"] = "中国 - 日本・ソ連軍用紙幣",
+        ["chinaJapaneseSovietMilitaryDescription"] = "中国で日本およびソ連の軍事当局が発行した軍用通貨。",
         ["peoplesRepublicTitle"] = "中国 - 中華人民共和国",
         ["peoplesRepublicDescription"] = "中華人民共和国の人民元、外貨兌換券、軍用支払証券。",
         ["manchukuoTitle"] = "中国 - 満洲国",
@@ -382,6 +397,96 @@ public static class AppLocalization
         ["Special Circulating Notes"] = ("特别流通券", "特別流通券", "特別流通券"),
         ["Tah Chung Bank"] = ("大中银行", "大中銀行", "大中銀行"),
         ["Territorial'no-Promiyshlennyi Bank' v Kitae / Territorial Development Bank in China, Urga"] = ("殖边银行（乌尔嘎）", "殖邊銀行（烏爾嘎）", "殖辺銀行（ウルガ）")
+    };
+
+    private static readonly Dictionary<string, (string Simplified, string Traditional, string Japanese)> ImportedChinaIssuerTranslations = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["American-Oriental Bank of Fukien"] = ("福建美华银行", "福建美華銀行", "福建米華銀行"),
+        ["American-Oriental Banking Corporation"] = ("美华银行", "美華銀行", "米華銀行"),
+        ["Asia Banking Corporation"] = ("亚洲银行公司", "亞洲銀行公司", "アジア銀行会社"),
+        ["Asiatic Banking Corporation"] = ("亚洲银行公司", "亞洲銀行公司", "アジア銀行会社"),
+        ["Bank of Canton Ltd."] = ("广东银行", "廣東銀行", "広東銀行"),
+        ["Bank of East Asia Ltd."] = ("东亚银行", "東亞銀行", "東亜銀行"),
+        ["Bank of Taiwan"] = ("台湾银行", "臺灣銀行", "台湾銀行"),
+        ["Bank of the Northwest"] = ("西北银行", "西北銀行", "西北銀行"),
+        ["Banque Belge pour l'Étranger"] = ("比利时海外银行", "比利時海外銀行", "ベルギー海外銀行"),
+        ["Banque de l'Indo-Chine"] = ("东方汇理银行", "東方匯理銀行", "インドシナ銀行"),
+        ["Banque Industrielle de Chine"] = ("中国实业银行", "中國實業銀行", "中国実業銀行"),
+        ["Banque Russo-Chinoise / Russo-Chinese Bank / Russko-Kitayskiy Bank'"] = ("华俄道胜银行", "華俄道勝銀行", "華露銀行"),
+        ["British & Belgian Industrial Bank of China"] = ("中英比实业银行", "中英比實業銀行", "中英白実業銀行"),
+        ["Chartered Bank of India, Australia & China"] = ("印度、澳大利亚及中国特许银行", "印度、澳大利亞及中國特許銀行", "印度・豪州・中国特許銀行"),
+        ["Chartered Mercantile Bank of India, London & China"] = ("印度、伦敦及中国特许汇理银行", "印度、倫敦及中國特許匯理銀行", "印度・ロンドン・中国特許為替銀行"),
+        ["China Specie Bank Ltd."] = ("中国银元银行", "中國銀元銀行", "中国正貨銀行"),
+        ["Chinese American Bank of Commerce"] = ("中美商业银行", "中美商業銀行", "中米商業銀行"),
+        ["Chinese Engineering & Mining Company Limited"] = ("中国工程矿务有限公司", "中國工程礦務有限公司", "中国工程鉱業公司"),
+        ["Chinese Italian Banking Corporation"] = ("中意银行", "中意銀行", "中伊銀行"),
+        ["Deutsch-Asiatische Bank"] = ("德华银行", "德華銀行", "独亜銀行"),
+        ["Exchange Bank of China"] = ("中国汇业银行", "中國匯業銀行", "中国為替銀行"),
+        ["Hong Kong & Shanghai Banking Corporation"] = ("香港上海汇丰银行", "香港上海匯豐銀行", "香港上海銀行"),
+        ["Hongkong & Shanghai Banking Corporation"] = ("香港上海汇丰银行", "香港上海匯豐銀行", "香港上海銀行"),
+        ["Industrial & Commercial Bank Ltd."] = ("工商银行", "工商銀行", "工商銀行"),
+        ["International Banking Corporation"] = ("国际银行公司", "國際銀行公司", "インターナショナル・バンキング社"),
+        ["Mercantile Bank of India"] = ("印度汇理银行", "印度匯理銀行", "インド商業銀行"),
+        ["National Commercial & Savings Bank Ltd."] = ("国民商业储蓄银行", "國民商業儲蓄銀行", "国民商業貯蓄銀行"),
+        ["Netherlands Trading Society"] = ("荷兰贸易公司", "荷蘭貿易公司", "オランダ貿易会社"),
+        ["Russko-Aziatskiy Bank'"] = ("俄亚银行", "俄亞銀行", "露亜銀行"),
+        ["Russko-Aziatskiy Bank' / Russo-Asiatic Bank"] = ("俄亚银行", "俄亞銀行", "露亜銀行"),
+        ["Russo-Asiatic Bank"] = ("俄亚银行", "俄亞銀行", "露亜銀行"),
+        ["Russo-Asiatic Bank / Russko-Aziatskiy Bank'"] = ("俄亚银行", "俄亞銀行", "露亜銀行"),
+        ["Russo-Chinese Bank"] = ("华俄道胜银行", "華俄道勝銀行", "華露銀行"),
+        ["Russo-Chinese Bank / Russko-Kitayskiy Bank'"] = ("华俄道胜银行", "華俄道勝銀行", "華露銀行"),
+        ["Sino-Belgian Bank / Banque Sino-Belge"] = ("中比银行", "中比銀行", "中白銀行"),
+        ["Sino-Scandinavian Bank"] = ("中斯堪的纳维亚银行", "中斯堪的納維亞銀行", "中スカンジナビア銀行"),
+        ["Yokohama Specie Bank"] = ("横滨正金银行", "橫濱正金銀行", "横浜正金銀行"),
+        ["Banque de l'Indo-Chine, Canton Shameen (Shamian Island)"] = ("东方汇理银行（广州沙面）", "東方匯理銀行（廣州沙面）", "インドシナ銀行（広州・沙面）"),
+        ["Russko-Aziatskiy Bank' - Kuldsha, Chuguchak & Kashgar Branch"] = ("俄亚银行（伊犁、塔城及喀什分行）", "俄亞銀行（伊犁、塔城及喀什分行）", "露亜銀行（伊犁・塔城・カシュガル支店）"),
+        ["Chen Wei, 3rd and 4th Army Corps Treasury"] = ("陈炜第三、第四军团金库", "陳煒第三、第四軍團金庫", "陳煒第三・第四軍団金庫"),
+        ["Chihli-Shantung Military"] = ("直鲁联军", "直魯聯軍", "直隷・山東連合軍"),
+        ["Chinese National Pacification Army"] = ("安国军", "安國軍", "安国軍"),
+        ["Chinese Republic Army, Navy and Air Force Sub-Headquarters"] = ("中华民国陆海空军副司令部", "中華民國陸海空軍副司令部", "中華民国陸海空軍副司令部"),
+        ["Chinese Republican Military Bank, Anhwei"] = ("安徽省军用银行", "安徽省軍用銀行", "安徽省軍用銀行"),
+        ["Crédit Commercial Sino-Français S.A., Peking"] = ("中法商业银行（北京）", "中法商業銀行（北京）", "中仏商業銀行（北京）"),
+        ["Japanese Imperial Government"] = ("日本帝国政府", "日本帝國政府", "日本帝国政府"),
+        ["Kiang-Se Bank of the Republic"] = ("江西共和国银行", "江西共和國銀行", "江西共和国銀行"),
+        ["Kwang Tung Provincial Treasury"] = ("广东省金库", "廣東省金庫", "広東省金庫"),
+        ["Kwangsi Military"] = ("广西军政府", "廣西軍政府", "広西軍政府"),
+        ["Kwangtung Republican Military Government"] = ("广东共和军政府", "廣東共和軍政府", "広東共和軍政府"),
+        ["Local Bank of Szechuen"] = ("四川地方银行", "四川地方銀行", "四川地方銀行"),
+        ["National Army"] = ("国民军", "國民軍", "国民軍"),
+        ["National Army Combined Headquarters"] = ("国民联军总司令部", "國民聯軍總司令部", "国民連軍総司令部"),
+        ["National Revolutionary Army"] = ("国民革命军", "國民革命軍", "国民革命軍"),
+        ["Provincial Army of Shantung"] = ("山东省军", "山東省軍", "山東省軍"),
+        ["Provincial Bank of Honan / Honan Province"] = ("河南省银行", "河南省銀行", "河南省銀行"),
+        ["Provincial Bank of Honan / Honan Province Treasury"] = ("河南省银行（省库）", "河南省銀行（省庫）", "河南省銀行（省金庫）"),
+        ["Republican China, Military Government, Nanking"] = ("中华民国军政府（南京）", "中華民國軍政府（南京）", "中華民国軍政府（南京）"),
+        ["Republican China, Military Government, Shanghai"] = ("中华民国军政府（上海）", "中華民國軍政府（上海）", "中華民国軍政府（上海）"),
+        ["South China Expeditionary Army"] = ("日本南支那方面军", "日本南支那方面軍", "日本南支那方面軍"),
+        ["Soviet Red Army"] = ("苏联红军", "蘇聯紅軍", "ソ連赤軍"),
+        ["Ta Han Szechuan Military Government"] = ("大汉四川军政府", "大漢四川軍政府", "大漢四川軍政府"),
+        ["Third and Fourth Route Army Headquarters Property Control Office"] = ("第三、第四路军总司令部财产管理处", "第三、第四路軍總司令部財產管理處", "第三・第四路軍総司令部財産管理処"),
+        ["Unknown issuer"] = ("发行机构不详", "發行機構不詳", "発行機関不明"),
+        ["Yunnan National Pacification Army"] = ("云南靖国军", "雲南靖國軍", "雲南靖国軍"),
+        ["Yunnan-Kwangtung-Kwangsi United Army for Kiangsi Relief"] = ("滇粤桂援赣联军", "滇粵桂援贛聯軍", "滇・粤・桂省の江西救援連合軍")
+    };
+
+    private static readonly Dictionary<string, (string Simplified, string Traditional, string Japanese)> ImportedChinaIssuerLocations = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["Canton"] = ("广州", "廣州", "広州"),
+        ["Changsha"] = ("长沙", "長沙", "長沙"),
+        ["Chefoo"] = ("烟台", "煙臺", "煙台"),
+        ["Chinwangtao"] = ("秦皇岛", "秦皇島", "秦皇島"),
+        ["Ch'ang Li"] = ("昌黎", "昌黎", "昌黎"),
+        ["Dairen"] = ("大连", "大連", "大連"),
+        ["Foochow"] = ("福州", "福州", "福州"),
+        ["Hankow"] = ("汉口", "漢口", "漢口"),
+        ["Harbin"] = ("哈尔滨", "哈爾濱", "ハルビン"),
+        ["Newchwang"] = ("营口", "營口", "営口"),
+        ["Peking"] = ("北京", "北京", "北京"),
+        ["Shanghai"] = ("上海", "上海", "上海"),
+        ["Suiyuan"] = ("绥远", "綏遠", "綏遠"),
+        ["Swatow"] = ("汕头", "汕頭", "汕頭"),
+        ["Tientsin"] = ("天津", "天津", "天津"),
+        ["Tsingtau"] = ("青岛", "青島", "青島")
     };
 
     private static readonly Dictionary<string, string> JapaneseIssuerTranslations = new(StringComparer.OrdinalIgnoreCase)
@@ -496,6 +601,10 @@ public static class AppLocalization
         collection.Id switch
         {
             "china-japanese-puppet-banks" => Get("collectionTitle", languageTag),
+            "china-foreign-banks" => Get("chinaForeignBanksTitle", languageTag),
+            "kiau-chau" => Get("kiauChauTitle", languageTag),
+            "china-chinese-military" => Get("chinaChineseMilitaryTitle", languageTag),
+            "china-japanese-soviet-military" => Get("chinaJapaneseSovietMilitaryTitle", languageTag),
             "china-peoples-republic" => Get("peoplesRepublicTitle", languageTag),
             "manchukuo" => Get("manchukuoTitle", languageTag),
             "china-empire" => Get("empireTitle", languageTag),
@@ -514,6 +623,10 @@ public static class AppLocalization
         collection.Id switch
         {
             "china-japanese-puppet-banks" => Get("collectionDescription", languageTag),
+            "china-foreign-banks" => Get("chinaForeignBanksDescription", languageTag),
+            "kiau-chau" => Get("kiauChauDescription", languageTag),
+            "china-chinese-military" => Get("chinaChineseMilitaryDescription", languageTag),
+            "china-japanese-soviet-military" => Get("chinaJapaneseSovietMilitaryDescription", languageTag),
             "china-peoples-republic" => Get("peoplesRepublicDescription", languageTag),
             "manchukuo" => Get("manchukuoDescription", languageTag),
             "china-empire" => Get("empireDescription", languageTag),
@@ -1736,7 +1849,17 @@ public static class AppLocalization
         ["Barclay & Fry Ltd., England"] = ("巴克莱与弗莱公司（英格兰）", "巴克萊與弗萊公司（英格蘭）", "バークレー＆フライ社（イングランド）"),
         ["Commercial Press Ltd., Shanghai"] = ("商务印书馆（上海）", "商務印書館（上海）", "商務印書館（上海）"),
         ["Continental Bank Note Co., New York"] = ("大陆钞票公司（纽约）", "大陸鈔票公司（紐約）", "コンチネンタル・バンクノート社（ニューヨーク）"),
-        ["Imperial Chinese Bureau of Engraving and Printing, Peking"] = ("中国印钞局（北京）", "中國印鈔局（北京）", "中国印刷局（北京）")
+        ["Imperial Chinese Bureau of Engraving and Printing, Peking"] = ("中国印钞局（北京）", "中國印鈔局（北京）", "中国印刷局（北京）"),
+        ["Ashby & Co., London"] = ("阿什比公司（伦敦）", "阿什比公司（倫敦）", "アシュビー社（ロンドン）"),
+        ["Bradbury Wilkinson. London"] = ("布拉德伯里·威尔金森公司（伦敦）", "布拉德伯里·威爾金森公司（倫敦）", "ブラッドベリー・ウィルキンソン社（ロンドン）"),
+        ["Giesecke & Devrient, Leipzig"] = ("吉塞克与德夫里恩特（莱比锡）", "吉塞克與德夫里恩特（萊比錫）", "ギーゼッケ・アンド・デブリエント（ライプツィヒ）"),
+        ["Giesecke & Devrient, Leizpig"] = ("吉塞克与德夫里恩特（莱比锡）", "吉塞克與德夫里恩特（萊比錫）", "ギーゼッケ・アンド・デブリエント（ライプツィヒ）"),
+        ["Nissen & Arnold, London"] = ("尼森与阿诺德公司（伦敦）", "尼森與阿諾德公司（倫敦）", "ニッセン・アンド・アーノルド社（ロンドン）"),
+        ["Smith Elder & Co., London"] = ("史密斯与埃尔德公司（伦敦）", "史密斯與埃爾德公司（倫敦）", "スミス・エルダー社（ロンドン）"),
+        ["Tokyo Printing Co Ltd"] = ("东京印刷株式会社", "東京印刷株式會社", "東京印刷株式会社"),
+        ["W. W. Sprague, England"] = ("W·W·斯普拉格公司（英格兰）", "W·W·斯普拉格公司（英格蘭）", "W・W・スプラーグ社（イングランド）"),
+        ["W. W. Sprague, London"] = ("W·W·斯普拉格公司（伦敦）", "W·W·斯普拉格公司（倫敦）", "W・W・スプラーグ社（ロンドン）"),
+        ["W.W. Sprague, London"] = ("W·W·斯普拉格公司（伦敦）", "W·W·斯普拉格公司（倫敦）", "W・W・スプラーグ社（ロンドン）")
     };
 
     private static readonly Dictionary<string, (string Simplified, string Traditional, string Japanese)> ResearchSourceTranslations = new(StringComparer.OrdinalIgnoreCase)
@@ -1941,9 +2064,65 @@ public static class AppLocalization
             };
         }
 
+        if (TryTranslateImportedChinaIssuer(issuer, languageTag, out var importedTranslation))
+        {
+            return importedTranslation;
+        }
+
         return languageTag == "ja-JP" && JapaneseIssuerTranslations.TryGetValue(issuer, out var japanese)
             ? japanese
             : issuer;
+    }
+
+    private static bool TryTranslateImportedChinaIssuer(string issuer, string languageTag, out string translated)
+    {
+        if (ImportedChinaIssuerTranslations.TryGetValue(issuer, out var exactTranslation))
+        {
+            translated = languageTag switch
+            {
+                "zh-CN" => exactTranslation.Simplified,
+                "zh-TW" => exactTranslation.Traditional,
+                _ => exactTranslation.Japanese
+            };
+            return true;
+        }
+
+        foreach (var location in ImportedChinaIssuerLocations.OrderByDescending(item => item.Key.Length))
+        {
+            var suffixes = new[] { $", {location.Key}", $" {location.Key} Branch" };
+            foreach (var suffix in suffixes)
+            {
+                if (!issuer.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                var baseIssuer = issuer[..^suffix.Length];
+                if (!ImportedChinaIssuerTranslations.TryGetValue(baseIssuer, out var baseTranslation))
+                {
+                    continue;
+                }
+
+                var bankName = languageTag switch
+                {
+                    "zh-CN" => baseTranslation.Simplified,
+                    "zh-TW" => baseTranslation.Traditional,
+                    _ => baseTranslation.Japanese
+                };
+                var city = languageTag switch
+                {
+                    "zh-CN" => location.Value.Simplified,
+                    "zh-TW" => location.Value.Traditional,
+                    _ => location.Value.Japanese
+                };
+                var branch = languageTag == "ja-JP" ? "支店" : "分行";
+                translated = $"{bankName}（{city}{branch}）";
+                return true;
+            }
+        }
+
+        translated = issuer;
+        return false;
     }
 
     public static string Denomination(Banknote banknote, string languageTag)
@@ -1956,6 +2135,8 @@ public static class AppLocalization
         var value = Regex.Replace(banknote.Denomination, @"(?<=\d)\.(?=\d{3}\b)", ",");
         value = Regex.Replace(value, @"\bWen\s*\(Cash\)", "Wen", RegexOptions.IgnoreCase);
         value = Regex.Replace(value, @"\b(?<unit>Taels?)\s*\(Liang\)", "${unit}", RegexOptions.IgnoreCase);
+        value = Regex.Replace(value, @"\bRubl(?:'|ey|ya)(?=\W|$)", "Ruble", RegexOptions.IgnoreCase);
+        value = Regex.Replace(value, @"\bKopyek'(?=\W|$)", "Kopeek", RegexOptions.IgnoreCase);
         var phrases = new (string Pattern, string Simplified, string Traditional, string Japanese)[]
         {
             ("Customs Gold Units?", "海关金单位", "海關金單位", "海関金単位"),
@@ -1971,7 +2152,11 @@ public static class AppLocalization
             ("Shu Gold", "金铢", "金銖", "金銖"),
             ("Ryo Gold", "金两", "金兩", "金両"),
             ("Bu Gold", "金分", "金分", "金分"),
-            ("Shanghai Currency", "上海货币", "上海貨幣", "上海通貨")
+            ("Shanghai Currency", "上海货币", "上海貨幣", "上海通貨"),
+            ("Ch'uan", "串", "串", "串"),
+            ("Coins?", "枚", "枚", "枚"),
+            ("Ruble|Rubles", "卢布", "盧布", "ルーブル"),
+            ("Rin", "厘", "厘", "厘")
         };
         foreach (var phrase in phrases.OrderByDescending(phrase => phrase.Pattern.Length))
         {
@@ -1986,9 +2171,9 @@ public static class AppLocalization
 
         var units = languageTag switch
         {
-            "zh-TW" => new[] { ("Dollars?", "元"), ("Yuan", "元"), ("Yen|Ien'?", "日圓"), ("Dollarov'?", "元"), ("Cents?", "分"), ("Fen", "分"), ("Chiao|Jiao|Choh", "角"), ("Cash", "文"), ("Wen", "文"), ("Kuan", "貫"), ("Mace", "錢"), ("Taels?", "兩"), ("Sen", "錢"), ("Tiao", "吊"), ("Coppers?", "銅錢"), ("Mei", "枚"), ("Shu", "銖"), ("Ryo", "兩"), ("Bu", "分"), ("Kopeek", "戈比"), ("Gold", "金"), ("Silver", "銀") },
-            "ja-JP" => new[] { ("Dollars?", "元"), ("Yuan", "元"), ("Yen|Ien'?", "円"), ("Dollarov'?", "元"), ("Cents?", "銭"), ("Fen", "分"), ("Chiao|Jiao|Choh", "角"), ("Cash", "文"), ("Wen", "文"), ("Kuan", "貫"), ("Mace", "銭"), ("Taels?", "両"), ("Sen", "銭"), ("Tiao", "吊"), ("Coppers?", "銅銭"), ("Mei", "枚"), ("Shu", "銖"), ("Ryo", "両"), ("Bu", "分"), ("Kopeek", "コペイカ"), ("Gold", "金"), ("Silver", "銀") },
-            _ => new[] { ("Dollars?", "元"), ("Yuan", "元"), ("Yen|Ien'?", "日元"), ("Dollarov'?", "元"), ("Cents?", "分"), ("Fen", "分"), ("Chiao|Jiao|Choh", "角"), ("Cash", "文"), ("Wen", "文"), ("Kuan", "贯"), ("Mace", "钱"), ("Taels?", "两"), ("Sen", "钱"), ("Tiao", "吊"), ("Coppers?", "铜钱"), ("Mei", "枚"), ("Shu", "铢"), ("Ryo", "两"), ("Bu", "分"), ("Kopeek", "戈比"), ("Gold", "金"), ("Silver", "银") }
+            "zh-TW" => new[] { ("Dollars?", "元"), ("Yuan", "元"), ("Yen|Ien'?", "日圓"), ("Dollarov'?", "元"), ("Cents?", "分"), ("Fen", "分"), ("Chiao|Jiao|Choh", "角"), ("Cash", "文"), ("Wen", "文"), ("Kuan", "貫"), ("Mace", "錢"), ("Taels?", "兩"), ("Sen", "錢"), ("Tiao", "吊"), ("Coppers?", "銅錢"), ("Mei", "枚"), ("Shu", "銖"), ("Ryo", "兩"), ("Bu", "分"), ("Kopeek", "戈比"), ("Ruble|Rubles", "盧布"), ("Rin", "厘"), ("Ch'uan", "串"), ("Coins?", "枚"), ("Gold", "金"), ("Silver", "銀") },
+            "ja-JP" => new[] { ("Dollars?", "元"), ("Yuan", "元"), ("Yen|Ien'?", "円"), ("Dollarov'?", "元"), ("Cents?", "銭"), ("Fen", "分"), ("Chiao|Jiao|Choh", "角"), ("Cash", "文"), ("Wen", "文"), ("Kuan", "貫"), ("Mace", "銭"), ("Taels?", "両"), ("Sen", "銭"), ("Tiao", "吊"), ("Coppers?", "銅銭"), ("Mei", "枚"), ("Shu", "銖"), ("Ryo", "両"), ("Bu", "分"), ("Kopeek", "コペイカ"), ("Ruble|Rubles", "ルーブル"), ("Rin", "厘"), ("Ch'uan", "串"), ("Coins?", "枚"), ("Gold", "金"), ("Silver", "銀") },
+            _ => new[] { ("Dollars?", "元"), ("Yuan", "元"), ("Yen|Ien'?", "日元"), ("Dollarov'?", "元"), ("Cents?", "分"), ("Fen", "分"), ("Chiao|Jiao|Choh", "角"), ("Cash", "文"), ("Wen", "文"), ("Kuan", "贯"), ("Mace", "钱"), ("Taels?", "两"), ("Sen", "钱"), ("Tiao", "吊"), ("Coppers?", "铜钱"), ("Mei", "枚"), ("Shu", "铢"), ("Ryo", "两"), ("Bu", "分"), ("Kopeek", "戈比"), ("Ruble|Rubles", "卢布"), ("Rin", "厘"), ("Ch'uan", "串"), ("Coins?", "枚"), ("Gold", "金"), ("Silver", "银") }
         };
         foreach (var (pattern, replacement) in units)
         {
@@ -2055,6 +2240,27 @@ public static class AppLocalization
             return $"{eraName}{firstYear}{yearSeparator}{secondYear}年（{firstDate}{dateSuffix}{westernYearSeparator}{secondDate}{dateSuffix}）";
         }
 
+        var noDateRange = Regex.Match(sourceDate,
+            @"ND\s*\(\s*(?<approx>ca\.)?\s*(?<start>[0-9]{4})\s*-\s*(?<end>[0-9]{4})\s*\)",
+            RegexOptions.IgnoreCase);
+        if (noDateRange.Success)
+        {
+            var approximate = noDateRange.Groups["approx"].Success;
+            var startYear = noDateRange.Groups["start"].Value;
+            var endYear = noDateRange.Groups["end"].Value;
+            if (languageTag == "ja-JP")
+            {
+                return $"日付不詳（{startYear}〜{endYear}年{(approximate ? "頃" : "")}）";
+            }
+
+            var qualifier = languageTag == "zh-TW"
+                ? (approximate ? "約" : "")
+                : (approximate ? "约" : "");
+            return languageTag == "zh-TW"
+                ? $"未標日期（{qualifier}{startYear}—{endYear}年）"
+                : $"未标日期（{qualifier}{startYear}—{endYear}年）";
+        }
+
         var noDate = Regex.Match(sourceDate, @"ND\s*\(\s*(?<approx>ca\.)?\s*(?<year>[0-9]{4})\s*\)", RegexOptions.IgnoreCase);
         if (noDate.Success)
         {
@@ -2090,6 +2296,19 @@ public static class AppLocalization
                 : $"{year}年{month}月（{overprintYear}年加印）";
         }
 
+        var firstRepublicYear = Regex.Match(sourceDate, @"(?i)^Year of the Republic\s*=\s*(?<year>[0-9]{4})(?<back>\s*\(on back\))?$");
+        if (firstRepublicYear.Success)
+        {
+            var year = firstRepublicYear.Groups["year"].Value;
+            var back = firstRepublicYear.Groups["back"].Success;
+            return languageTag switch
+            {
+                "zh-TW" => $"民國紀年：{year}年{(back ? "（背面）" : "")}",
+                "ja-JP" => $"中華民国紀年：{year}年{(back ? "（裏面）" : "")}",
+                _ => string.Concat("民国纪年：", year, "年", back ? "（背面）" : "")
+            };
+        }
+
         return sourceDate;
     }
 
@@ -2117,6 +2336,7 @@ public static class AppLocalization
             ["ND (1940's)"] = ("未标日期（1940年代）", "未標日期（1940年代）", "日付不詳（1940年代）"),
             ["ND (1943-1944)"] = ("未标日期（1943—1944年）", "未標日期（1943—1944年）", "日付不詳（1943〜1944年）"),
             ["ND (1944-1945)"] = ("未标日期（1944—1945年）", "未標日期（1944—1945年）", "日付不詳（1944〜1945年）"),
+            ["ND (ca. 1903-1914)"] = ("未标日期（约1903—1914年）", "未標日期（約1903—1914年）", "日付不詳（1903〜1914年頃）"),
             ["ND (1945 - about late 1950ies)"] = ("未标日期（约1945年至1950年代后期）", "未標日期（約1945年至1950年代後期）", "日付不詳（1945年から1950年代後半頃）"),
             ["ND (1984-1993)"] = ("未标日期（1984—1993年）", "未標日期（1984—1993年）", "日付不詳（1984〜1993年）"),
             ["ND (1993-2003)"] = ("未标日期（1993—2003年）", "未標日期（1993—2003年）", "日付不詳（1993〜2003年）"),
@@ -2139,6 +2359,31 @@ public static class AppLocalization
             ["Year 21 (── ┼┼) of the Republic (1932) & 01.01.1933"] = ("民国21年（1932年；票面记号“── ┼┼”）；背面日期：01.01.1933", "民國21年（1932年；票面記號「── ┼┼」）；背面日期：01.01.1933", "中華民国21年（1932年、票面記号「── ┼┼」）。裏面の日付：01.01.1933"),
             ["Year 3 Keio (1867)"] = ("庆应3年（1867年）", "慶應3年（1867年）", "慶応3年（1867年）"),
             ["Year 4 Keio (1868)"] = ("庆应4年（1868年）", "慶應4年（1868年）", "慶応4年（1868年）"),
+            ["01.01.1912 (1st month in the 1st year of the Republic of China)"] = ("1912年1月1日（民国元年正月）", "1912年1月1日（民國元年正月）", "1912年1月1日（中華民国元年正月）"),
+            ["01.01.1912 (1st month of the 1st year of the Republic)"] = ("1912年1月1日（民国元年正月）", "1912年1月1日（民國元年正月）", "1912年1月1日（中華民国元年正月）"),
+            ["01.08.1928 - overprint late 1920's"] = ("01.08.1928（20世纪20年代后期加印）", "01.08.1928（20世紀20年代後期加印）", "01.08.1928（1920年代後半の加刷）"),
+            ["1-1926 - overprint late 1920's"] = ("1926年1月（20世纪20年代后期加印）", "1926年1月（20世紀20年代後期加印）", "1926年1月（1920年代後半の加刷）"),
+            ["15.07.1923 - overprint late 1920's"] = ("15.07.1923（20世纪20年代后期加印）", "15.07.1923（20世紀20年代後期加印）", "15.07.1923（1920年代後半の加刷）"),
+            ["1921 - overprint late 1920's"] = ("1921年（20世纪20年代后期加印）", "1921年（20世紀20年代後期加印）", "1921年（1920年代後半の加刷）"),
+            ["1927 & 1928 - overprint late 1920's"] = ("1927、1928年（20世纪20年代后期加印）", "1927、1928年（20世紀20年代後期加印）", "1927年・1928年（1920年代後半の加刷）"),
+            ["9-4609 Huang Ti (1912)"] = ("黄帝纪年4609年（1912年）", "黃帝紀年4609年（1912年）", "黄帝紀年4609年（1912年）"),
+            ["10.09.1902 (on front)"] = ("10.09.1902（正面日期）", "10.09.1902（正面日期）", "10.09.1902（表面の日付）"),
+            ["1913-1919 Handstamped dates; for similar later notes with printed dates see CHINA PS-185A"] = ("1913—1919年手盖日期；类似后期印刷日期纸币参见中国 PS-185A", "1913—1919年手蓋日期；類似後期印刷日期紙幣參見中國 PS-185A", "1913〜1919年の手押し日付。印刷日付の後期券は中国 PS-185A参照"),
+            ["1921-1929 Typed dates; for similar earlier notes with handstamped dates see CHINA PS-185"] = ("1921—1929年打字日期；类似早期手盖日期纸币参见中国 PS-185", "1921—1929年打字日期；類似早期手蓋日期紙幣參見中國 PS-185", "1921〜1929年のタイプ打ち日付。手押し日付の旧券は中国 PS-185参照"),
+            ["July 七月 of Kuang Hsu Year 32 = 1906"] = ("光绪三十二年七月（1906年）", "光緒三十二年七月（1906年）", "光緒32年7月（1906年）"),
+            ["Showa year 12 = 1937"] = ("昭和12年（1937年）", "昭和12年（1937年）", "昭和12年（1937年）"),
+            ["Year 33 (1907)"] = ("光绪三十三年（1907年）", "光緒三十三年（1907年）", "光緒33年（1907年）"),
+            ["Year 33 = 1944"] = ("第33年（1944年）", "第33年（1944年）", "第33年（1944年）"),
+            ["Year of the Republic = 1922"] = ("民国纪年：1922年", "民國紀年：1922年", "中華民国紀年：1922年"),
+            ["Year of the Republic = 1922 (on back)"] = ("民国纪年：1922年（背面）", "民國紀年：1922年（背面）", "中華民国紀年：1922年（裏面）"),
+            ["Year of the Republic = 1926"] = ("民国纪年：1926年", "民國紀年：1926年", "中華民国紀年：1926年"),
+            ["18xx"] = ("19世纪（年份不详）", "19世紀（年份不詳）", "19世紀（年不詳）"),
+            ["19xx (1900's)"] = ("20世纪初（约1900年代）", "20世紀初（約1900年代）", "20世紀初頭（1900年代頃）"),
+            ["19xx (1920's)"] = ("20世纪20年代（年份不详）", "20世紀20年代（年份不詳）", "1920年代（年不詳）"),
+            ["CD 1898"] = ("CD纪年：1898年", "CD紀年：1898年", "CD紀年：1898年"),
+            ["D. 21.01.1875, 20.02.1888 & 16.05.1900 / 15.01.1902"] = ("所列日期（D.）：21.01.1875、20.02.1888、16.05.1900 / 15.01.1902", "所列日期（D.）：21.01.1875、20.02.1888、16.05.1900 / 15.01.1902", "記載日付（D.）：21.01.1875、20.02.1888、16.05.1900 / 15.01.1902"),
+            ["L. 21.01.1875, 20.02.1888 & 16.05.1900 / 12.02.1901"] = ("所列日期（L.）：21.01.1875、20.02.1888、16.05.1900 / 12.02.1901", "所列日期（L.）：21.01.1875、20.02.1888、16.05.1900 / 12.02.1901", "記載日付（L.）：21.01.1875、20.02.1888、16.05.1900 / 12.02.1901"),
+            ["L. 21.01.1875, 20.02.1888 & 16.05.1900 / 15.01.1902"] = ("所列日期（L.）：21.01.1875、20.02.1888、16.05.1900 / 15.01.1902", "所列日期（L.）：21.01.1875、20.02.1888、16.05.1900 / 15.01.1902", "記載日付（L.）：21.01.1875、20.02.1888、16.05.1900 / 15.01.1902"),
             ["Year 8 & 9 of the Republic (1919 & 1920)"] = ("民国八、九年（1919、1920年）", "民國八、九年（1919、1920年）", "中華民国8・9年（1919年・1920年）"),
             ["Year Meiji 32-43 (1899-1910) vertically at left on back"] = ("明治32—43年（1899—1910年；背面左侧竖排）", "明治32—43年（1899—1910年；背面左側直排）", "明治32〜43年（1899〜1910年。裏面左側に縦書き）"),
             ["Year Meiji 32-45 (1899-1912) & Year Taisho 1-2 (1912-1913) vertically at left on back"] = ("明治32—45年（1899—1912年）、大正1—2年（1912—1913年；背面左侧竖排）", "明治32—45年（1899—1912年）、大正1—2年（1912—1913年；背面左側直排）", "明治32〜45年（1899〜1912年）および大正1〜2年（1912〜1913年。裏面左側に縦書き）"),

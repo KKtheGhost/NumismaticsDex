@@ -11,8 +11,8 @@ public sealed class CatalogTests
         var collections = BanknoteCatalogStore.LoadCollections();
         var banknotes = BanknoteCatalogStore.Load();
 
-        Assert.Equal(12, collections.Count);
-        Assert.Equal(2299, banknotes.Count);
+        Assert.Equal(16, collections.Count);
+        Assert.Equal(2929, banknotes.Count);
         Assert.All(banknotes.Where(note => note.Research is not null), note =>
         {
             var research = Assert.IsType<BanknoteResearch>(note.Research);
@@ -201,7 +201,7 @@ public sealed class CatalogTests
     {
         var viewModel = new CatalogViewModel();
 
-        Assert.Equal(2299, viewModel.TotalCount);
+        Assert.Equal(2929, viewModel.TotalCount);
         Assert.Equal("P-J1.b", viewModel.InitialSelection.PickLabel);
         Assert.Equal(166, viewModel.VisibleBanknotes.Count);
 

@@ -60,6 +60,85 @@ public sealed class AppLocalizationTests
     }
 
     [Fact]
+    public void NewCollectionTitlesAndDescriptionsUseAllSupportedLocales()
+    {
+        var expectedTitles = new Dictionary<string, (string Simplified, string Traditional, string English, string Japanese)>
+        {
+            ["china-foreign-banks"] = ("中国 - 外国银行", "中國 - 外國銀行", "CHINA - FOREIGN BANKS", "中国 - 外国銀行"),
+            ["kiau-chau"] = ("中国 - 胶州湾租借地", "中國 - 膠州灣租借地", "KIAU CHAU", "中国 - 膠州湾租借地"),
+            ["china-chinese-military"] = ("中国 - 中国军用纸币", "中國 - 中國軍用紙幣", "CHINA - CHINESE MILITARY", "中国 - 中国軍用紙幣"),
+            ["china-japanese-soviet-military"] = ("中国 - 日苏军用纸币", "中國 - 日蘇軍用紙幣", "CHINA - JAPANESE & SOVIET MILITARY", "中国 - 日本・ソ連軍用紙幣")
+        };
+
+        foreach (var (collectionId, expected) in expectedTitles)
+        {
+            var collection = new CatalogCollection(collectionId, expected.English, "Source description", "https://example.test/collection");
+            Assert.Equal(expected.Simplified, AppLocalization.CollectionTitle(collection, "zh-CN"));
+            Assert.Equal(expected.Traditional, AppLocalization.CollectionTitle(collection, "zh-TW"));
+            Assert.Equal(expected.English, AppLocalization.CollectionTitle(collection, "en-US"));
+            Assert.Equal(expected.Japanese, AppLocalization.CollectionTitle(collection, "ja-JP"));
+            Assert.NotEqual(collection.Description, AppLocalization.CollectionDescription(collection, "zh-CN"));
+            Assert.NotEqual(collection.Description, AppLocalization.CollectionDescription(collection, "zh-TW"));
+            Assert.NotEqual(collection.Description, AppLocalization.CollectionDescription(collection, "ja-JP"));
+            Assert.All(new[] { "zh-CN", "zh-TW", "en-US", "ja-JP" }, language =>
+                Assert.NotEmpty(AppLocalization.CollectionDescription(collection, language)));
+        }
+    }
+
+    [Fact]
+    public void NewCollectionBanknoteMetadataDoesNotFallBackToEnglish()
+    {
+        var collectionIds = new[]
+        {
+            "china-foreign-banks",
+            "kiau-chau",
+            "china-chinese-military",
+            "china-japanese-soviet-military"
+        };
+        var banknotes = BanknoteCatalogStore.Load()
+            .Where(banknote => collectionIds.Contains(banknote.CollectionId))
+            .ToArray();
+        var languages = new[] { "zh-CN", "zh-TW", "ja-JP" };
+
+        static bool ContainsLatinText(string value) => value.Any(character =>
+            character is >= 'A' and <= 'Z' or >= 'a' and <= 'z');
+
+        foreach (var language in languages)
+        {
+            foreach (var banknote in banknotes.DistinctBy(note => note.Issuer))
+            {
+                if (ContainsLatinText(banknote.Issuer))
+                {
+                    Assert.NotEqual(banknote.Issuer, AppLocalization.Issuer(banknote, language));
+                }
+            }
+            foreach (var banknote in banknotes.DistinctBy(note => note.Printer).Where(note => !string.IsNullOrWhiteSpace(note.Printer)))
+            {
+                Assert.NotEqual(banknote.Printer, AppLocalization.Printer(banknote, language));
+            }
+            foreach (var banknote in banknotes.DistinctBy(note => note.Denomination))
+            {
+                if (ContainsLatinText(banknote.Denomination))
+                {
+                    Assert.NotEqual(banknote.Denomination, AppLocalization.Denomination(banknote, language));
+                }
+            }
+            foreach (var banknote in banknotes.DistinctBy(note => note.IssueDate))
+            {
+                if (ContainsLatinText(banknote.IssueDate))
+                {
+                    Assert.NotEqual(banknote.IssueDate, AppLocalization.IssueDate(banknote, language));
+                }
+            }
+            foreach (var banknote in banknotes.DistinctBy(note => (note.VariantDescription, note.PickSubnumber))
+                         .Where(note => !string.IsNullOrWhiteSpace(note.VariantDescription)))
+            {
+                Assert.NotEqual(banknote.VariantDescription, AppLocalization.Variant(banknote, language));
+            }
+        }
+    }
+
+    [Fact]
     public void PrinterAndIssuerTranslateKnownValuesAndPreserveUnknownValues()
     {
         var banknote = TestBanknoteFactory.Create(printer: "Watson Printing Company");

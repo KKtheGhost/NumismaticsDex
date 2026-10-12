@@ -18,6 +18,30 @@ $assetRoot = Join-Path $repositoryRoot 'NumismaticsDex.App\Assets'
 $imageRoot = Join-Path $assetRoot 'Banknotes'
 New-Item -Path $imageRoot -ItemType Directory -Force | Out-Null
 
+function Get-SourcePageHtml([string]$url) {
+    $response = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 30
+    $stream = $response.RawContentStream
+    if ($null -eq $stream) {
+        return $response.Content
+    }
+
+    $stream.Position = 0
+    $bytes = [byte[]]::new($stream.Length)
+    [void]$stream.Read($bytes, 0, $bytes.Length)
+    $contentType = [string]$response.Headers['Content-Type']
+    $charsetMatch = [regex]::Match($contentType, '(?i)\bcharset\s*=\s*["'']?(?<charset>[^;"''\s]+)')
+    if ($charsetMatch.Success) {
+        return [System.Text.Encoding]::GetEncoding($charsetMatch.Groups['charset'].Value).GetString($bytes)
+    }
+
+    try {
+        return [System.Text.UTF8Encoding]::new($false, $true).GetString($bytes)
+    }
+    catch [System.Text.DecoderFallbackException] {
+        return [System.Text.Encoding]::GetEncoding(1252).GetString($bytes)
+    }
+}
+
 function ConvertTo-PlainText([string]$html) {
     $text = [regex]::Replace($html, '(?is)<br\s*/?>', ' ')
     $text = [regex]::Replace($text, '(?s)<[^>]+>', ' ')
@@ -202,21 +226,28 @@ function Resolve-ImageCode([string]$variant, [string]$pickNumber, [int]$variantI
     return $imageCode
 }
 
-$categoryHtml = (Invoke-WebRequest -Uri $CategoryUrl -UseBasicParsing -TimeoutSec 30).Content
+$categoryHtml = Get-SourcePageHtml $CategoryUrl
 $sourcePages = @($CategoryUrl)
-if ($CategoryUrl -match '(?i)/CIN-REP-CIN\.htm(?:\?.*)?$') {
+$detailPagePattern = if ($CategoryUrl -match '(?i)/CIN-REP-CIN\.htm(?:\?.*)?$') {
+    'CIN-REP-CIN-[0-9]+\.htm'
+}
+elseif ($CategoryUrl -match '(?i)/CIN-REP-FGN\.htm(?:\?.*)?$') {
+    'CIN-REP-FGN-[0-9]+\.htm'
+}
+
+if ($detailPagePattern) {
     $sourceRoot = $CategoryUrl.Substring(0, $CategoryUrl.LastIndexOf('/') + 1)
-    $pageMatches = [regex]::Matches($categoryHtml, '(?i)href\s*=\s*["''](?<page>CIN-REP-CIN-[0-9]+\.htm)(?:#[^"'']*)?["'']')
+    $pageMatches = [regex]::Matches($categoryHtml, '(?i)href\s*=\s*["''](?<page>' + $detailPagePattern + ')(?:#[^"'']*)?["'']')
     $pageNames = @($pageMatches | ForEach-Object { $_.Groups['page'].Value } | Sort-Object -Unique)
     if ($pageNames.Count -eq 0) {
-        throw "No detail pages found in Chinese Banks overview: $CategoryUrl"
+        throw "No detail pages found in collection overview: $CategoryUrl"
     }
     $sourcePages = @($pageNames | ForEach-Object { $sourceRoot + $_ })
 }
 
 $sourcePageCells = [System.Collections.Generic.List[object]]::new()
 foreach ($sourcePageUrl in $sourcePages) {
-    $pageHtml = if ($sourcePageUrl -eq $CategoryUrl) { $categoryHtml } else { (Invoke-WebRequest -Uri $sourcePageUrl -UseBasicParsing -TimeoutSec 30).Content }
+    $pageHtml = if ($sourcePageUrl -eq $CategoryUrl) { $categoryHtml } else { Get-SourcePageHtml $sourcePageUrl }
     $pageSourceRoot = $sourcePageUrl.Substring(0, $sourcePageUrl.LastIndexOf('/') + 1)
     $pageCells = [regex]::Matches($pageHtml, '(?is)<td[^>]*width="20%"[^>]*>(.*?)</td>')
     foreach ($pageCell in $pageCells) {
@@ -242,11 +273,11 @@ Write-Output "Parsing $($sourcePageCells.Count) banknote cards from $($sourcePag
 foreach ($cellMatch in $sourcePageCells) {
     $cell = $cellMatch.Html
     $sourceRoot = $cellMatch.SourceRoot
-    $pickMatch = [regex]::Match($cell, '(?is)P-?(?<pick>(?:(?:[A-Z]+)?[0-9]+[A-Z]?|S\s*-?\s*[0-9](?:\s*[0-9]){1,2}[A-Z]?|NL|A))(?:\s+NL(?<specimen>s)?)?\s*</a>')
+    $pickMatch = [regex]::Match($cell, '(?is)P-?(?<pick>(?:(?:[A-Z]+)?[0-9]+[A-Z]?|S\s*-?\s*[0-9](?:\s*[0-9])*[A-Z]?|NL|A))(?:\s+NL(?<specimen>s)?)?\s*</a>')
     $unlinkedSeriesPick = $false
     if (-not $pickMatch.Success) {
         $plainCell = ConvertTo-PlainText $cell
-        $plainPickMatch = [regex]::Match($plainCell, '(?i)\bPS\s*-\s*(?<pick>[0-9](?:\s*[0-9]){1,2}[A-Z]?)')
+        $plainPickMatch = [regex]::Match($plainCell, '(?i)\bPS\s*-\s*(?<pick>[0-9](?:\s*[0-9])*[A-Z]?)')
         if (-not $plainPickMatch.Success) {
             continue
         }
@@ -300,7 +331,7 @@ foreach ($cellMatch in $sourcePageCells) {
             Write-Output "Requesting detail page $($pageCache.Count + 1): $detailUrl"
         }
         try {
-            $pageCache[$detailUrl] = (Invoke-WebRequest -Uri $detailUrl -UseBasicParsing -TimeoutSec 30).Content
+            $pageCache[$detailUrl] = Get-SourcePageHtml $detailUrl
         }
         catch {
             $errors.Add("Could not load $detailUrl : $($_.Exception.Message)")
@@ -482,11 +513,23 @@ if (Test-Path $catalogPath) {
 
 $preservedBanknotes = @($previousBanknotes | Where-Object { $_.collectionId -ne $CollectionId })
 $combinedRecords = @($preservedBanknotes) + @($records)
-$identityCollisions = @($combinedRecords | Group-Object {
-    '{0}:{1}:{2}' -f $_.countryCode, $_.pickNumber, $_.pickSubnumber
-} | Where-Object Count -gt 1)
+$identityGroups = [System.Collections.Generic.Dictionary[string, System.Collections.Generic.List[object]]]::new([System.StringComparer]::Ordinal)
+foreach ($record in $combinedRecords) {
+    $identity = '{0}:{1}:{2}' -f $record.countryCode, $record.pickNumber, $record.pickSubnumber
+    if (-not $identityGroups.ContainsKey($identity)) {
+        $identityGroups[$identity] = [System.Collections.Generic.List[object]]::new()
+    }
+    $identityGroups[$identity].Add($record)
+}
+$identityCollisions = @($identityGroups.GetEnumerator() | Where-Object { $_.Value.Count -gt 1 })
 if ($identityCollisions.Count -gt 0) {
-    throw "Import would create $($identityCollisions.Count) duplicate country/Pick/subnumber identity(ies)."
+    $collisionDetails = @($identityCollisions | ForEach-Object {
+        $recordsForIdentity = @($_.Value | ForEach-Object {
+            "$($_.collectionId) / $($_.issuer) / sub='$($_.pickSubnumber)' / value='$($_.denomination)' / date='$($_.issueDate)' / source='$($_.sourceUrl)' / front='$($_.frontImageUrl)' / variant='$($_.variantDescription)'"
+        })
+        "  $($_.Key): $($recordsForIdentity -join ' <> ')"
+    })
+    throw "Import would create $($identityCollisions.Count) duplicate country/Pick/subnumber identity(ies):`n$($collisionDetails -join [Environment]::NewLine)"
 }
 
 if ($DryRun) {
