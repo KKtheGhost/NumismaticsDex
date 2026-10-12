@@ -5,7 +5,7 @@
 
 <!-- coverage:start -->
 
-[![Core/non-UI logic coverage: 99.96%](https://img.shields.io/badge/Core%20%2F%20non--UI%20logic%20coverage-99.96%25-brightgreen)](https://github.com/KKtheGhost/NumismaticsDex/actions/workflows/ci.yml)
+[![Core/non-UI logic coverage: 100.00%](https://img.shields.io/badge/Core%20%2F%20non--UI%20logic%20coverage-100.00%25-brightgreen)](https://github.com/KKtheGhost/NumismaticsDex/actions/workflows/ci.yml)
 <!-- coverage:end -->
 
 NumismaticsDex is a Windows-native numismatic catalog demo for exploring banknotes by region, country, collection, and Pick variant.
