@@ -42,7 +42,17 @@ jobs:
           }
       - name: Create temporary signing certificate
         shell: pwsh
-        run: .\scripts\New-DevCertificate.ps1
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $certificate = New-SelfSignedCertificate `
+            -Type CodeSigningCert `
+            -Subject 'CN=NumismaticsDex' `
+            -CertStoreLocation 'Cert:\CurrentUser\My' `
+            -HashAlgorithm SHA256 `
+            -NotAfter (Get-Date).AddYears(1)
+          $artifactDirectory = Join-Path $PWD 'artifacts'
+          New-Item -Path $artifactDirectory -ItemType Directory -Force | Out-Null
+          Export-Certificate -Cert $certificate -FilePath (Join-Path $artifactDirectory 'NumismaticsDex_Dev.cer') -Force | Out-Null
       - name: Package signed MSIX
         shell: pwsh
         run: .\scripts\Package.ps1
