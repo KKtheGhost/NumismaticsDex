@@ -44,7 +44,7 @@ GitHub Actions builds the WinUI app, runs tests, and collects line coverage for 
 
 ## Releases
 
-Pushing a `v0.0.1` tag runs the release workflow and publishes a signed GitHub prerelease with the MSIX, its Windows App Runtime dependencies, and the signing certificate. The package uses a temporary self-signed demo certificate; trust it only if you accept that certificate, and do not treat it as a production publisher identity.
+Pushing a `v0.0.1` tag or manually running the Release workflow with that tag publishes a signed GitHub prerelease with the MSIX, its Windows App Runtime dependencies, and the signing certificate. The package uses a temporary self-signed demo certificate; trust it only if you accept that certificate, and do not treat it as a production publisher identity.
 
 ## Create an MSIX
 

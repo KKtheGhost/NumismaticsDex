@@ -4,6 +4,13 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: Existing release tag to package
+        required: true
+        default: v0.0.1
+        type: string
 
 permissions:
   contents: write
@@ -11,8 +18,12 @@ permissions:
 jobs:
   package:
     runs-on: windows-latest
+    env:
+      RELEASE_TAG: ${{ inputs.tag_name || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag_name || github.ref }}
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
@@ -24,10 +35,10 @@ jobs:
         shell: pwsh
         run: |
           [xml]$manifest = Get-Content '.\NumismaticsDex.App\Package.appxmanifest'
-          $tagVersion = $env:GITHUB_REF_NAME.TrimStart('v')
+          $tagVersion = $env:RELEASE_TAG.TrimStart('v')
           $expectedVersion = "$tagVersion.0"
           if ($manifest.Package.Identity.Version -ne $expectedVersion) {
-            throw "Tag $env:GITHUB_REF_NAME does not match package version $($manifest.Package.Identity.Version)."
+            throw "Tag $env:RELEASE_TAG does not match package version $($manifest.Package.Identity.Version)."
           }
       - name: Create temporary signing certificate
         shell: pwsh
@@ -38,7 +49,7 @@ jobs:
       - name: Assemble release files
         shell: pwsh
         run: |
-          $version = $env:GITHUB_REF_NAME.TrimStart('v')
+          $version = $env:RELEASE_TAG.TrimStart('v')
           $package = Get-ChildItem '.\NumismaticsDex.App\AppPackages' -Filter 'NumismaticsDex.App_*.msix' -Recurse |
             Sort-Object LastWriteTime -Descending | Select-Object -First 1
           if (-not $package) { throw 'The MSIX package was not generated.' }
@@ -62,7 +73,8 @@ jobs:
       - name: Publish GitHub prerelease
         uses: softprops/action-gh-release@v2
         with:
-          name: NumismaticsDex ${{ github.ref_name }}
+          name: NumismaticsDex ${{ inputs.tag_name || github.ref_name }}
+          tag_name: ${{ inputs.tag_name || github.ref_name }}
           prerelease: true
           files: |
             artifacts/release/NumismaticsDex_*_x64.msix
