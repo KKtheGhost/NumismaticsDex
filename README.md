@@ -5,7 +5,7 @@
 
 <!-- coverage:start -->
 
-**Core/non-UI logic line coverage:** 100.00% (3016/3016 lines), updated from commit 010fec7.
+**Core/non-UI logic line coverage:** 100.00% (3016/3016 lines), updated from commit 322e12a.
 <!-- coverage:end -->
 
 NumismaticsDex is a Windows-native numismatic catalog demo for exploring banknotes by region, country, collection, and Pick variant.
