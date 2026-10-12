@@ -30,7 +30,18 @@ $lineRate = [double]::Parse(
     [System.Globalization.CultureInfo]::InvariantCulture)
 $percentage = ($lineRate * 100).ToString('0.00', [System.Globalization.CultureInfo]::InvariantCulture)
 $shortCommit = $Commit.Substring(0, [Math]::Min(7, $Commit.Length))
-$coverageText = "**Core/non-UI logic line coverage:** $percentage% ($coveredLines/$validLines lines), updated from commit $shortCommit."
+$badgeColor = if ($lineRate -ge 0.9) {
+    'brightgreen'
+}
+elseif ($lineRate -ge 0.75) {
+    'yellow'
+}
+else {
+    'red'
+}
+$badgeUrl = "https://img.shields.io/badge/Core%20%2F%20non--UI%20logic%20coverage-$($percentage)%25-$badgeColor"
+$coverageText = "[![Core/non-UI logic coverage: $percentage%]($badgeUrl)](https://github.com/KKtheGhost/NumismaticsDex/actions/workflows/ci.yml)"
+$coverageSummary = "Core/non-UI logic line coverage: $percentage% ($coveredLines/$validLines lines), updated from commit $shortCommit."
 
 $readmePath = Join-Path $repositoryRoot 'README.md'
 $readme = [System.IO.File]::ReadAllText($readmePath)
@@ -49,5 +60,5 @@ $updatedReadme = $readme.Substring(0, $contentStart) + $replacement + $readme.Su
 
 Write-Output $coverageText
 if ($env:GITHUB_STEP_SUMMARY) {
-    Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value $coverageText
+    Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value $coverageSummary
 }
