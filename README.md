@@ -5,7 +5,7 @@
 
 <!-- coverage:start -->
 
-**Test line coverage:** 100.00% (3016/3016 production lines), updated from commit 964717d.
+**Core/non-UI logic line coverage:** 99.96% (3015/3016 lines), updated from commit local.
 <!-- coverage:end -->
 
 NumismaticsDex is a Windows-native numismatic catalog demo. The catalog includes `CHINA - Japanese Puppet Banks` (105 Pick entries, 166 variants), `CHINA - People's Republic` (130 Pick entries, 181 variants), `MANCHUKUO` (21 Pick entries, 31 variants), `CHINA - Empire` (90 Pick entries, 173 variants), `CHINA - REPUBLIC - CHINESE BANKS` (710 Pick entries, 1,531 variants), and seven `JAPAN` collections (134 Pick entries, 217 variants), for 1,190 Pick entries and 2,299 country/Pick/subnumber records total.
@@ -40,7 +40,7 @@ Run the unit suite locally:
 dotnet test .\NumismaticsDex.Tests\NumismaticsDex.Tests.csproj -c Release
 ```
 
-GitHub Actions builds the WinUI app, runs tests, and collects production line coverage. The CI badge above reflects the latest workflow result; after pushes to `main`, CI updates the coverage percentage and source commit shown here.
+GitHub Actions builds the WinUI app, runs tests, and collects line coverage for Core and non-UI catalog, localization, and image/source logic. The WinUI view is build-checked but excluded from unit line coverage. The CI badge above reflects the latest workflow result; after pushes to `main`, CI updates the coverage percentage and source commit shown here.
 
 ## Releases
 

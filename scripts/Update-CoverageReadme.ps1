@@ -30,7 +30,7 @@ $lineRate = [double]::Parse(
     [System.Globalization.CultureInfo]::InvariantCulture)
 $percentage = ($lineRate * 100).ToString('0.00', [System.Globalization.CultureInfo]::InvariantCulture)
 $shortCommit = $Commit.Substring(0, [Math]::Min(7, $Commit.Length))
-$coverageText = "**Test line coverage:** $percentage% ($coveredLines/$validLines production lines), updated from commit $shortCommit."
+$coverageText = "**Core/non-UI logic line coverage:** $percentage% ($coveredLines/$validLines lines), updated from commit $shortCommit."
 
 $readmePath = Join-Path $repositoryRoot 'README.md'
 $readme = [System.IO.File]::ReadAllText($readmePath)
