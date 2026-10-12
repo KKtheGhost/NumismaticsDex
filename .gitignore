@@ -1,0 +1,11 @@
+.vs/
+**/bin/
+**/obj/
+**/AppPackages/
+**/TestResults/
+artifacts/
+coverage/
+NumismaticsDex.App/Assets/Banknotes/
+*.msix
+*.appx
+*.pfx

@@ -1,0 +1,22 @@
+<Application
+    x:Class="NumismaticsDex.App.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <controls:XamlControlsResources />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="PageBackgroundBrush" Color="#F1F4F0" />
+            <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="InkBrush" Color="#172923" />
+            <SolidColorBrush x:Key="MutedBrush" Color="#64756D" />
+            <SolidColorBrush x:Key="AccentBrush" Color="#A84F35" />
+            <SolidColorBrush x:Key="AccentSoftBrush" Color="#F5E8E1" />
+            <SolidColorBrush x:Key="LineBrush" Color="#DDE5DF" />
+            <SolidColorBrush x:Key="GreenBrush" Color="#276B55" />
+            <SolidColorBrush x:Key="ErrorBrush" Color="#B42318" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

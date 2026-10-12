@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumismaticsDex.Core", "NumismaticsDex.Core\NumismaticsDex.Core.csproj", "{245BC56F-6D29-41E8-96FC-D89838D4783C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumismaticsDex.App", "NumismaticsDex.App\NumismaticsDex.App.csproj", "{73F3922D-44B4-41FF-9D5C-F114E4E7387A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumismaticsDex.Tests", "NumismaticsDex.Tests\NumismaticsDex.Tests.csproj", "{45102DA7-7AA8-4C4B-9D52-85D10F318C56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{245BC56F-6D29-41E8-96FC-D89838D4783C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{245BC56F-6D29-41E8-96FC-D89838D4783C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{245BC56F-6D29-41E8-96FC-D89838D4783C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{245BC56F-6D29-41E8-96FC-D89838D4783C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F3922D-44B4-41FF-9D5C-F114E4E7387A}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{73F3922D-44B4-41FF-9D5C-F114E4E7387A}.Debug|Any CPU.Build.0 = Debug|x64
+		{73F3922D-44B4-41FF-9D5C-F114E4E7387A}.Release|Any CPU.ActiveCfg = Release|x64
+		{73F3922D-44B4-41FF-9D5C-F114E4E7387A}.Release|Any CPU.Build.0 = Release|x64
+		{45102DA7-7AA8-4C4B-9D52-85D10F318C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45102DA7-7AA8-4C4B-9D52-85D10F318C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45102DA7-7AA8-4C4B-9D52-85D10F318C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45102DA7-7AA8-4C4B-9D52-85D10F318C56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
